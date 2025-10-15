@@ -2,29 +2,20 @@ const express = require("express");
 let app = express();
 
 //this will only handle get aall methods / user
-app.get("/user",(req, res) => {
-   res.send({firstName:"Harshit ", lastName:"singh"})
+app.use("/user",(req, res, next) => {
+   res.send("responsed ")
+   next()
 
-})
-app.post("/user",(req, res) => {
- //saving data to dB
+},
+ 
+ (req, res) => {
+   res.send("responsed 2nd ")
 
-   res.send("data saved to the database")
+}
 
-})
-
-app.delete("/user",(req, res) => {
- //saving data to dB
-
-   res.send("deleted successfully")
-
-})
+)
 
 
-//this will send them all http method API call to /test 
-app.use("/test", (req, res) => {
-  res.send("hello form the test");
-});
 
 
 
