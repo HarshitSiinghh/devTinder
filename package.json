@@ -10,11 +10,13 @@
   "author": "Harshit Singh",
   "type": "commonjs",
   "main": "index.js",
-  "scripts": { 
+  "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.19.1",
+    "mongose": "^0.0.2-security"
   }
 }
