@@ -1,6 +1,24 @@
+ const User = require("./Models/user")
 const express = require("express");
- const {connectDB}=require("./config/database")
+ const connectDB = require("./config/database")
+ 
 let app = express();
+
+
+
+app.post("/user", async  (req , res)=>{
+  const  user = new User({
+    firstName :"virat ",
+    lastName: "kohli",
+    age: 20,
+    email: "viratkohli@gmail.com",
+    gender: "male"
+  }) 
+
+
+  await user.save()
+ res.send("user addes successfully")
+})
 
 
 connectDB().then(()=>{
@@ -10,7 +28,7 @@ connectDB().then(()=>{
 });
   
 }).catch((err)=>{
-  console.log("cannot connect to DB the is a error");
+  console.log("cannot connect to DB the is a error"); 
   
 })
 
