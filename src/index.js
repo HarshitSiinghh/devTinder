@@ -29,7 +29,8 @@ if(!isUpdatesAllows){
 if(data.skills>10){
   throw new Error("skills cannot be greater then 10")
 
-}
+} 
+
     const updateEle = await User.findByIdAndUpdate(getEle, data, {
       new: true, // Return updated document
       runValidators: true
