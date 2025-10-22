@@ -7,23 +7,43 @@ let app = express();
 
 app.use(express.json());
 
-app.patch("/user", async (req,res)=>{
-  const getEle = req.body._id
-  try{
-    const updateEle = await User.findByIdAndUpdate(getEle,{ firstName:"lordHarshit" })
-    if( updateEle.length ===0){
-      res.status(400).send(' user update Unsuccessfull')
+app.patch("/user/:userId", async (req, res) => {
+  const getEle = req.params?.userId
+  const data = req.body;
+  try {
+const ALLOW_UPDATES = [
+  "firstName",
+  "userName",
+  "lastName",
+  "age",
+  "email",
+  "password",
+  "gender",
+  "skills"
+];
+     const isUpdatesAllows = Object.keys(data).every((k) => ALLOW_UPDATES.includes(k));
+
+if(!isUpdatesAllows){
+  throw new Error("Update is Not allowed of this ")
+}
+if(data.skills>10){
+  throw new Error("skills cannot be greater then 10")
+
+}
+    const updateEle = await User.findByIdAndUpdate(getEle, data, {
+      new: true, // Return updated document
+      runValidators: true
+    });
+
+    if (!updateEle) {
+      return res.status(404).send("User not found");
     }
-    else{
-      res.send(updateEle)
-    }
-
-  }catch (err){
-      res.send("error in this  operation in th catch block")
-
-
-     }
-})
+    res.send("user is updated successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error in update operation (catch block)");
+  }
+});
 
 app.delete("/user", async(req,res)=>{
   const userID = req.body._id
