@@ -1,19 +1,12 @@
 
-var sumDivisibleByK = function(nums, k) {
-    let result = 0;
-    let count =1
-    for(let i=0; i<nums.length; i++){
-         if( nums[i] === nums[i+1]){
-             ++count 
-         }
-         if( nums[i] !== nums[i+1]){
-             if(count % k === 0){
-                  result= result + nums[i]* count 
-             count =1
-                }
-              
-         }
-    }
-     return  result
+var rotateString = function(s, goal) {
+
+if (s.length !== goal.length) return false;
+    
+    // Concatenate s with itself
+    // If goal is a rotation, it will appear as a substring
+    console.log((s + s));
+    
+    return (s + s).includes(goal);  
 };
-console.log(sumDivisibleByK([1,2,2,3,3,3,3,4],  2));
+console.log(rotateString("abcde" ,"cdeab")) ;
